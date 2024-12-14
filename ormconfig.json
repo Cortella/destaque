@@ -1,0 +1,13 @@
+{
+  "type": "mysql",
+  "port": 3308,
+  "host": "localhost",
+  "username": "root",
+  "password": "",
+  "database": "projectx",
+  "migrations": ["./src/shared/infra/typeorm/migrations/*.ts"],
+  "entities": ["./src/modules/*/infra/typeorm/entities/*.ts"],
+  "cli": {
+    "migrationsDir": "./src/shared/infra/typeorm/migrations"
+  }
+}
