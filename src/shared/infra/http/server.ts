@@ -14,7 +14,7 @@ const app = express();
 const door = 3333;
 app.use(express.json());
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerFile));
-
+console.log("SERVIDOR INICIANDO")
 app.use(router);
 
 app.use(

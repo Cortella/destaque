@@ -15,34 +15,45 @@ class UsersRepository implements IUsersRepository {
   async create({
     id,
     name,
+    username,
     email,
-    driver_license,
-    password,
-    avatar,
+    password
   }: ICreateUserDTO): Promise<void> {
     const user = this.repository.create({
       id,
       name,
+      username,
       email,
-      driver_license,
       password,
-      avatar,
     });
     await this.repository.save(user);
   }
 
   async findById(id: string): Promise<User> {
-    const user = this.repository.findOne({ id });
+
+    const user = await this.repository.findOne({
+        where: { id },
+        select: ["id", "name", "email", "username", "created_at"],
+    });
+
     if (!user) {
-      throw new AppError("User not found! ");
+        throw new AppError("User not found!");
     }
+
     return user;
-  }
+}
 
   async findByEmail(email: string): Promise<User> {
-    const user = this.repository.findOne({ email });
+    const user = await this.repository.findOne({
+      where: { email },
+      select: ["id", "name", "email", "username", "created_at"],
+  });
 
-    return user;
+  if (!user) {
+      throw new AppError("User not found!");
+  }
+
+  return user;
   }
 }
 

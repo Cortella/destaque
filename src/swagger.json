@@ -1,11 +1,11 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "API Documentation",
-    "description": "This is an application for listing and create users",
+    "title": "API Destaque Documentation",
+    "description": "This application is a API for Destaque",
     "version": "1.0.0",
     "contact": {
-      "email": "guilherme_moura.10222@outlook.com"
+      "email": "nicolau.cortella@gmail.com"
     }
   },
   "tags": [
