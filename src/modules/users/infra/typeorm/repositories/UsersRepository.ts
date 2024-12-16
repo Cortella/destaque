@@ -49,10 +49,6 @@ class UsersRepository implements IUsersRepository {
       select: ["id", "name", "email", "username", "created_at", "password", "isAdmin"],
   });
 
-  if (!user) {
-      throw new AppError("User not found!");
-  }
-
   return user;
   }
 }
