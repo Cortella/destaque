@@ -1,13 +1,14 @@
 import { Router } from "express";
 
-import { AuthenticateUserController } from "@modules/users/useCases/authenticateUser/AuthenticateUserController";
-import { RefreshTokenController } from "@modules/users/useCases/refreshToken/RefreshTokenController";
-import { CreateTeamController } from "@modules/teams/createTeam/CreateTeamController";
+import { CreateTeamController } from "@modules/teams/useCases/createTeam/CreateTeamController";
+import { ShowTeamsController } from "@modules/teams/useCases/showTeams/ShowTeamsController";
 
 const teamsRoutes = Router();
 
 const createTeamController = new CreateTeamController();
+const showTeamsController = new ShowTeamsController();
 
 teamsRoutes.post("/", createTeamController.handle);
+teamsRoutes.get("/", showTeamsController.handle);
 
 export { teamsRoutes };
