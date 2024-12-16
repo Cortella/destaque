@@ -17,7 +17,9 @@
   "paths": {
     "/users": {
       "post": {
-        "tags": ["Users"],
+        "tags": [
+          "Users"
+        ],
         "summary": "Create a new user",
         "description": "To create a new user, add the 'name' and 'email' fields in the request body.",
         "requestBody": {
@@ -25,7 +27,10 @@
           "content": {
             "application/json": {
               "schema": {
-                "required": ["name", "email"],
+                "required": [
+                  "name",
+                  "email"
+                ],
                 "type": "object",
                 "properties": {
                   "name": {
@@ -55,6 +60,51 @@
           },
           "400": {
             "description": "Bad Request"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Get un user by id ",
+        "description": "return un user to this user id",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "example": "uuidv4"
+                      },
+                      "name": {
+                        "type": "string",
+                        "example" : "Example"
+                      },
+                      "email": {
+                        "type": "string",
+                        "example" : "teste@teste.com"
+                      },
+                      "username": {
+                        "type": "string",
+                        "example": "meuusername"
+                      },
+                      "created_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2024-12-14T01:35:21.000Z"
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -97,11 +147,13 @@
         }
       },
       "get": {
-        "tags": ["Category"],
+        "tags": [
+          "Category"
+        ],
         "summary": "list all categories",
         "description": "list all categories",
         "responses": {
-          "200":{
+          "200": {
             "description": "Success",
             "content": {
               "application/json": {
