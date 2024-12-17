@@ -1,20 +1,20 @@
 import { Response, Request } from "express";
 import { container } from "tsyringe";
-import { CreateTounamentUseCase } from "./CreateTounamentUseCase";
+import { CreateTournamentUseCase } from "./CreateTounamentUseCase";
 
-class CreateTounamentController {
+class CreateTournamentController {
   async handle(request: Request, response: Response): Promise<Response> {
     try {
-      const createTournament = container.resolve(CreateTounamentUseCase);
+      const createTournament = container.resolve(CreateTournamentUseCase);
       const data = request.body;
 
-      const Tounament = await createTournament.execute(data);
+      const Tournament = await createTournament.execute(data);
 
-      return response.status(201).json(Tounament);
+      return response.status(201).json(Tournament);
     } catch (error) {
       return response.status(400).json({ error: error.message });
     }
   }
 }
 
-export { CreateTounamentController };
+export { CreateTournamentController };

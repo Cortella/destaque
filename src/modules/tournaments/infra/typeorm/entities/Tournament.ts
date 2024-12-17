@@ -2,8 +2,8 @@
 import { Column, CreateDateColumn, Entity, PrimaryColumn } from "typeorm";
 import { v4 as uuidV4 } from "uuid";
 
-@Entity("tounaments")
-class Tounament {
+@Entity("tournaments")
+class Tournament {
   @PrimaryColumn()
   id: string;
 
@@ -30,4 +30,4 @@ class Tounament {
   }
 }
 
-export { Tounament };
+export { Tournament };
