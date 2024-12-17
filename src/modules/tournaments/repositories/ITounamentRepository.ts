@@ -1,11 +1,11 @@
-import { ICreateTeamDTO } from "../dtos/ICreateTournamentsDTO";
-import { Team } from "../infra/typeorm/entities/Tounament";
+import { ICreateTournamentsDTO } from "../dtos/ICreateTournamentsDTO";
+import { Tounament } from "../infra/typeorm/entities/Tounament";
 
-interface ITeamsRepository {
-  create(data: ICreateTeamDTO): Promise<void>;
-  findById(id: string): Promise<Team>;
-  findByName(name: string): Promise<Team>;
-  show(): Promise<Team[]>
+interface ITournamentRepository {
+  create(data: ICreateTournamentsDTO): Promise<void>;
+  findById(id: string): Promise<Tounament>;
+  findByName(name: string): Promise<Tounament>;
+  show(): Promise<Tounament[]>
 }
 
-export { ITeamsRepository };
+export { ITournamentRepository };

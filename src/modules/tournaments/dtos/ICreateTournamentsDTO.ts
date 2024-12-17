@@ -6,9 +6,9 @@ export interface ICreateTournamentsDTO {
   id?: string;
   name: string;
   initalDate: Date;
-  FinalDate: string;
+  finalDate: string;
   teams?: Team[];
-  type: TounamentType;
+  type?: TounamentType;
   champion?: Team;
 
 }

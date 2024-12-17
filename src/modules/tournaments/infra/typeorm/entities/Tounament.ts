@@ -1,4 +1,4 @@
-import { TounamentType } from "../../../dtos/ICreateTournamentsDTO";
+
 import { Column, CreateDateColumn, Entity, PrimaryColumn } from "typeorm";
 import { v4 as uuidV4 } from "uuid";
 
@@ -17,7 +17,7 @@ class Tounament {
   finalDate: Date;
 
   @Column({ type: "varchar", length: 50 })
-  type: TounamentType;
+  type: string;
 
   @CreateDateColumn()
   created_at: Date;

@@ -1,9 +1,7 @@
 import { inject, injectable } from "tsyringe";
-
 import { AppError } from "@shared/errors/AppError";
-import { ITeamsRepository } from "../../repositories/ITounamentRepository";
-import { ICreateTeamDTO } from "../../dtos/ICreateTournamentsDTO";
 import { Team } from "@modules/teams/infra/typeorm/entities/Team";
+import { ITeamsRepository } from "@modules/teams/repositories/ITeamsRepository";
 
 @injectable()
 class ShowTeamsUseCase {

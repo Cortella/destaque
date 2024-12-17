@@ -3,20 +3,22 @@ import { Repository, getRepository } from "typeorm";
 import { AppError } from "@shared/errors/AppError";
 import { ITeamsRepository } from "@modules/teams/repositories/ITeamsRepository";
 import { ICreateTeamDTO } from "@modules/teams/dtos/ICreateTeamDTO";
-import { Team } from "../entities/Tounament";
+import { Tounament } from "../entities/Tounament";
+import { ITournamentRepository } from "@modules/tournaments/repositories/ITounamentRepository";
+import { ICreateTournamentsDTO } from "@modules/tournaments/dtos/ICreateTournamentsDTO";
 
-class TeamsRepository implements ITeamsRepository {
-  private repository: Repository<Team>;
+class TounamentRepository implements ITournamentRepository {
+  private repository: Repository<Tounament>;
 
   constructor() {
-    this.repository = getRepository(Team);
+    this.repository = getRepository(Tounament);
   }
-  async create(data: ICreateTeamDTO): Promise<void> {
-    const team = this.repository.create(data);
-    await this.repository.save(team);
+  async create(data: ICreateTournamentsDTO): Promise<void> {
+    const Tounament = this.repository.create(data);
+    await this.repository.save(Tounament);
   }
 
-  async findById(id: string): Promise<Team> {
+  async findById(id: string): Promise<Tounament> {
     const team = await this.repository.findOne({
       where: { id },
     });
@@ -28,18 +30,18 @@ class TeamsRepository implements ITeamsRepository {
     return team;
   }
 
-  async findByName(name: string): Promise<Team> {
-    const team = await this.repository.findOne({
+  async findByName(name: string): Promise<Tounament> {
+    const tounament = await this.repository.findOne({
       where: { name },
     });
 
-    return team;
+    return tounament;
   }
 
-  show(): Promise<Team[]> {
-    const teams = this.repository.find();
-    return teams;
+  show(): Promise<Tounament[]> {
+    const tounaments = this.repository.find();
+    return tounaments;
   }
 }
 
-export { TeamsRepository };
+export { TounamentRepository };
