@@ -1,6 +1,6 @@
 import { Team } from "@modules/teams/infra/typeorm/entities/Team";
 
-export type TounamentType = 'mata-mata' | 'grupos' | 'liga-nacional' | 'copa';
+export type TournamentType = 'mata-mata' | 'grupos' | 'liga-nacional' | 'copa';
 
 export interface ICreateTournamentsDTO {
   id?: string;
@@ -8,12 +8,12 @@ export interface ICreateTournamentsDTO {
   initalDate: Date;
   finalDate: string;
   teams?: Team[];
-  type?: TounamentType;
+  type?: TournamentType;
   champion?: Team;
 
 }
 
-export interface ITounamentLeagueFormatDTO {
+export interface ITournamentLeagueFormatDTO {
   rounds: number;
 
 }

@@ -1,11 +1,11 @@
 import { inject, injectable } from "tsyringe";
 
 import { AppError } from "@shared/errors/AppError";
-import { ITournamentRepository } from "../../repositories/ITounamentRepository";
+import { ITournamentRepository } from "../../repositories/ITournamentRepository";
 import { ICreateTournamentsDTO } from "@modules/tournaments/dtos/ICreateTournamentsDTO";
 
 @injectable()
-class CreateTounamentUseCase {
+class CreateTournamentUseCase {
   constructor(
     @inject("TournanamentRepository")
     private tournamentsRepository: ITournamentRepository
@@ -22,4 +22,4 @@ class CreateTounamentUseCase {
   }
 }
 
-export { CreateTounamentUseCase };
+export { CreateTournamentUseCase };

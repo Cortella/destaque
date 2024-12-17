@@ -9,10 +9,10 @@ import { IUsersRepository } from "@modules/users/repositories/IUsersRepository";
 import { IUsersTokensRepository } from "@modules/users/repositories/IUsersTokensrepository";
 import { ITeamsRepository } from "@modules/teams/repositories/ITeamsRepository";
 import { TeamsRepository } from "@modules/teams/infra/typeorm/repositories/TeamsRepository";
-import { ITournamentRepository } from "@modules/tournaments/repositories/ITounamentRepository";
-import { TounamentRepository } from "@modules/tournaments/infra/typeorm/repositories/TounamentRepository";
-
-
+import { ITournamentRepository } from "@modules/tournaments/repositories/ITournamentRepository";
+import { TournamentRepository } from "@modules/tournaments/infra/typeorm/repositories/TournamentRepository";
+import { IGamesRepository } from "@modules/games/repositories/IGamesRepository";
+import { GamesRepository } from "@modules/games/infra/typeorm/repositories/GamesRepository";
 
 container.registerSingleton<IUsersRepository>(
   "UsersRepository",
@@ -30,6 +30,11 @@ container.registerSingleton<ITeamsRepository>(
 );
 
 container.registerSingleton<ITournamentRepository>(
-  "TounamentsRepository",
-  TounamentRepository
+  "TournamentsRepository",
+  TournamentRepository
+);
+
+container.registerSingleton<IGamesRepository>(
+  "GamesRepository",
+  GamesRepository
 );
