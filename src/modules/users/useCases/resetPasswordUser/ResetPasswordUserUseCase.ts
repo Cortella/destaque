@@ -1,9 +1,9 @@
-import { IUsersRepository } from "@modules/accounts/repositories/IUsersRepository";
-import { IUsersTokensRepository } from "@modules/accounts/repositories/IUsersTokensRepository";
 import { IDateProvider } from "@shared/container/providers/DateProvider/IDateProvider";
 import { AppError } from "@shared/errors/AppError";
 import { inject, injectable } from "tsyringe";
 import { hash } from "bcrypt";
+import { IUsersTokensRepository } from "@modules/users/repositories/IUsersTokensrepository";
+import { IUsersRepository } from "@modules/users/repositories/IUsersRepository";
 
 interface IRequest {
   token: string;

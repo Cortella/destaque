@@ -9,6 +9,8 @@ import { IUsersRepository } from "@modules/users/repositories/IUsersRepository";
 import { IUsersTokensRepository } from "@modules/users/repositories/IUsersTokensrepository";
 import { ITeamsRepository } from "@modules/teams/repositories/ITeamsRepository";
 import { TeamsRepository } from "@modules/teams/infra/typeorm/repositories/TeamsRepository";
+import { ITournamentRepository } from "@modules/tournaments/repositories/ITounamentRepository";
+import { TounamentRepository } from "@modules/tournaments/infra/typeorm/repositories/TounamentRepository";
 
 
 
@@ -25,4 +27,9 @@ container.registerSingleton<IUsersTokensRepository>(
 container.registerSingleton<ITeamsRepository>(
   "TeamsRepository",
   TeamsRepository
+);
+
+container.registerSingleton<ITournamentRepository>(
+  "TounamentsRepository",
+  TounamentRepository
 );
