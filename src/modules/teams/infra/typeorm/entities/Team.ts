@@ -1,4 +1,5 @@
-import { Column, CreateDateColumn, Entity, PrimaryColumn } from "typeorm";
+import { Game } from "@modules/games/infra/typeorm/entities/Game";
+import { Column, CreateDateColumn, Entity, PrimaryColumn, OneToMany } from "typeorm";
 import { v4 as uuidV4 } from "uuid";
 
 @Entity("teams")
@@ -21,6 +22,11 @@ class Team {
   @CreateDateColumn()
   created_at: Date;
 
+  @OneToMany(() => Game, (game) => game.homeTeam)
+  homeGames: Game[];
+
+  @OneToMany(() => Game, (game) => game.awayTeam)
+  awayGames: Game[];
 
   constructor() {
     if (!this.id) {

@@ -1,10 +1,27 @@
 import { Tournament } from '@modules/tournaments/infra/typeorm/entities/Tournament';
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
+import { Team } from '@modules/teams/infra/typeorm/entities/Team'; // Importação da entidade Team
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  ManyToOne,
+  JoinColumn,
+} from 'typeorm';
 
 @Entity('games')
 export class Game {
   @PrimaryGeneratedColumn('uuid')
   id: string;
+
+  // Relacionamento com o time mandante
+  @ManyToOne(() => Team, (team) => team.homeGames)
+  @JoinColumn({ name: 'homeTeamId' })
+  homeTeam: Team;
+
+  // Relacionamento com o time visitante
+  @ManyToOne(() => Team, (team) => team.awayGames)
+  @JoinColumn({ name: 'awayTeamId' })
+  awayTeam: Team;
 
   @Column()
   homeTeamId: string;
@@ -30,6 +47,11 @@ export class Game {
     away: number;
   };
 
+  // Relacionamento com o torneio
   @ManyToOne(() => Tournament, (tournament) => tournament.games)
+  @JoinColumn({ name: 'tournamentId' })
   tournament: Tournament;
+
+  @Column()
+  tournamentId: string;
 }
