@@ -1,5 +1,6 @@
+import { League } from "@modules/league/infra/typeorm/entities/League";
 import { User } from "@modules/users/infra/typeorm/entities/User";
-import { Entity, Column, CreateDateColumn, OneToOne, JoinColumn, PrimaryColumn } from "typeorm";
+import { Entity, Column, CreateDateColumn, OneToOne, JoinColumn, PrimaryColumn, OneToMany } from "typeorm";
 import { v4 as uuidV4 } from "uuid";
 
 @Entity("players")
@@ -20,6 +21,8 @@ export class Player {
   @JoinColumn()
   user: User;
 
+  @OneToMany(() => League, (league) => league.admin)
+  adminLeagues: League[];
   constructor() {
     if (!this.id) {
       this.id = uuidV4();

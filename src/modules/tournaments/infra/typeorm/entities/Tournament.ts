@@ -1,6 +1,7 @@
 
 import { Game } from "@modules/games/infra/typeorm/entities/Game";
-import { Column, CreateDateColumn, Entity, OneToMany, PrimaryColumn } from "typeorm";
+import { League } from "@modules/league/infra/typeorm/entities/League";
+import { Column, CreateDateColumn, Entity, ManyToOne, OneToMany, PrimaryColumn } from "typeorm";
 import { v4 as uuidV4 } from "uuid";
 
 @Entity("tournaments")
@@ -26,6 +27,8 @@ class Tournament {
   @OneToMany(() => Game, (game) => game.tournament)
   games: Game[];
   
+  @ManyToOne(() => League, (league) => league.tournaments)
+  league: League;
   constructor() {
     if (!this.id) {
       this.id = uuidV4();
