@@ -13,6 +13,8 @@ import { ITournamentRepository } from "@modules/tournaments/repositories/ITourna
 import { TournamentRepository } from "@modules/tournaments/infra/typeorm/repositories/TournamentRepository";
 import { IGamesRepository } from "@modules/games/repositories/IGamesRepository";
 import { GamesRepository } from "@modules/games/infra/typeorm/repositories/GamesRepository";
+import { IPlayersRepository } from "@modules/players/repositories/IPlayersRepository";
+import { PlayersRepository } from "@modules/players/infra/typeorm/repositories/PlayerRepository";
 
 container.registerSingleton<IUsersRepository>(
   "UsersRepository",
@@ -37,4 +39,9 @@ container.registerSingleton<ITournamentRepository>(
 container.registerSingleton<IGamesRepository>(
   "GamesRepository",
   GamesRepository
+);
+
+container.registerSingleton<IPlayersRepository>(
+  "PlayersRepository",
+  PlayersRepository
 );
