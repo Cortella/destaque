@@ -2,15 +2,16 @@ import { Tournament } from '@modules/tournaments/infra/typeorm/entities/Tourname
 import { Team } from '@modules/teams/infra/typeorm/entities/Team'; // Importação da entidade Team
 import {
   Entity,
-  PrimaryGeneratedColumn,
   Column,
   ManyToOne,
   JoinColumn,
+  PrimaryColumn,
 } from 'typeorm';
+import { v4 as uuidV4 } from "uuid";
 
 @Entity('games')
 export class Game {
-  @PrimaryGeneratedColumn('uuid')
+  @PrimaryColumn()
   id: string;
 
   // Relacionamento com o time mandante
@@ -54,4 +55,9 @@ export class Game {
 
   @Column()
   tournamentId: string;
+  constructor() {
+    if (!this.id) {
+      this.id = uuidV4();
+    }
+  }
 }

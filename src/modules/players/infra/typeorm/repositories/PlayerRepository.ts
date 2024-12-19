@@ -31,7 +31,6 @@ class PlayersRepository implements IPlayersRepository {
   }
 
   async findByUsername(username: string): Promise<Player> {
-    console.log("estou iniciando a busca")
     const player = await this.repository.findOne({
       where: { username },
     });

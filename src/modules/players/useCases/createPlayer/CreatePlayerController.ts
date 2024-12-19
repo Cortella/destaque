@@ -10,8 +10,6 @@ class CreatePlayerController {
       const createPlayerUseCase = container.resolve(CreatePlayerUseCase);
       const data: ICreatePlayerDTO = request.body;
       const userId = request?.user?.id;
-      console.log(userId)
-
 
       const player = await createPlayerUseCase.execute(data, userId);
 
