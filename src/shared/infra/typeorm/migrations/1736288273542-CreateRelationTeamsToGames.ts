@@ -1,6 +1,6 @@
 import { MigrationInterface, QueryRunner, TableForeignKey } from 'typeorm';
 
-export class UpdateGameTeamRelations1687123456789 implements MigrationInterface {
+export class CreateRelationTeamsToGames1736288273542 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     // Adiciona as chaves estrangeiras para a relação entre games e teams
     await queryRunner.createForeignKey(

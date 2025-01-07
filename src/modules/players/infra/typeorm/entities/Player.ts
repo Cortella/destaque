@@ -26,15 +26,14 @@ export class Player {
   @CreateDateColumn({ type: "timestamp" })
   created_at: Date;
 
-  // Relacionamento com User (adiciona coluna userId)
-  @OneToOne(() => User, (user) => user.player, { cascade: true })
-@JoinColumn({ name: "userId" }) // Nome explícito da coluna
-user: User;
+  @OneToOne(type => User)
+  @JoinColumn({ name: "userId" })
+  user: User;
 
-  @Column({ type: "uuid", nullable: true })
-  userId: string; // Coluna usada pelo relacionamento com User
+  @Column({ type: "varchar", nullable: true })
+  userId: string;
 
-  // Relacionamento com Leagues como membro
+  // // Relacionamento com Leagues como membro
   @ManyToMany(() => League, (league) => league.members)
   leagues: League[];
 

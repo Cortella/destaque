@@ -1,6 +1,6 @@
 import { MigrationInterface, QueryRunner, Table, TableForeignKey } from 'typeorm';
 
-export class CreateLeaguesTable1674605340292 implements MigrationInterface {
+export class CreateLeaguesTable1736289196226 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     // Criando a tabela 'leagues'
     await queryRunner.createTable(

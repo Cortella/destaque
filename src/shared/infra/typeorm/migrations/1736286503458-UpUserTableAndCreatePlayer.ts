@@ -6,12 +6,14 @@ import {
   TableForeignKey,
 } from "typeorm";
 
-export class UpdateUserTableAndCreatePlayer1634075673485
+export class UpUserTableAndCreatePlayer1736286503458
   implements MigrationInterface
 {
   public async up(queryRunner: QueryRunner): Promise<void> {
+    // Remove a coluna "username" da tabela "users"
     await queryRunner.dropColumn("users", "username");
 
+    // Cria a tabela "players"
     await queryRunner.createTable(
       new Table({
         name: "players",
@@ -38,35 +40,40 @@ export class UpdateUserTableAndCreatePlayer1634075673485
             default: "CURRENT_TIMESTAMP",
             isNullable: false,
           },
+          {
+            name: "userId", // Adiciona a coluna para a relação com "users"
+            type: "varchar",
+            isNullable: false,
+          },
         ],
-      })
+      }),
     );
 
-    // Criar a chave estrangeira entre "players" e "users"
+    // Cria a chave estrangeira entre "players" e "users"
     await queryRunner.createForeignKey(
       "players",
       new TableForeignKey({
-        columnNames: ["id"],
-        referencedColumnNames: ["id"],
-        referencedTableName: "users",
-        onDelete: "CASCADE",
-        onUpdate: "CASCADE",
-      })
+        columnNames: ["userId"], // Coluna em "players"
+        referencedColumnNames: ["id"], // Coluna em "users"
+        referencedTableName: "users", // Tabela referenciada
+        onDelete: "CASCADE", // Exclusão em cascata
+        onUpdate: "CASCADE", // Atualização em cascata
+      }),
     );
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    // Remover a tabela "players"
+    // Remove a tabela "players"
     await queryRunner.dropTable("players");
 
-    // Adicionar o campo "username" de volta à tabela "users"
+    // Adiciona novamente a coluna "username" à tabela "users"
     await queryRunner.addColumn(
       "users",
       new TableColumn({
         name: "username",
         type: "varchar",
         isNullable: false,
-      })
+      }),
     );
   }
 }
