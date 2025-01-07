@@ -1,23 +1,20 @@
 import { container } from "tsyringe";
 
-import { CategoriesRepository } from "@modules/cars/infra/typeorm/repositories/CategoriesRepository";
-import { SpecificationsRepository } from "@modules/cars/infra/typeorm/repositories/SpecificationsRepository";
-import { ICategoriesRepository } from "@modules/cars/repositories/ICategoriesRepository";
-import { ISpecificationsRepository } from "@modules/cars/repositories/ISpecificationsRepository";
+import "@shared/container/providers/DateProvider";
+import "@shared/container/providers/MailProvider";
+
 import { UsersRepository } from "@modules/users/infra/typeorm/repositories/UsersRepository";
 import { UsersTokensRepository } from "@modules/users/infra/typeorm/repositories/UsersTokensRepository";
 import { IUsersRepository } from "@modules/users/repositories/IUsersRepository";
 import { IUsersTokensRepository } from "@modules/users/repositories/IUsersTokensrepository";
-
-container.registerSingleton<ICategoriesRepository>(
-  "CategoriesRepository",
-  CategoriesRepository
-);
-
-container.registerSingleton<ISpecificationsRepository>(
-  "SpecificationsRepository",
-  SpecificationsRepository
-);
+import { ITeamsRepository } from "@modules/teams/repositories/ITeamsRepository";
+import { TeamsRepository } from "@modules/teams/infra/typeorm/repositories/TeamsRepository";
+import { ITournamentRepository } from "@modules/tournaments/repositories/ITournamentRepository";
+import { TournamentRepository } from "@modules/tournaments/infra/typeorm/repositories/TournamentRepository";
+import { IGamesRepository } from "@modules/games/repositories/IGamesRepository";
+import { GamesRepository } from "@modules/games/infra/typeorm/repositories/GamesRepository";
+import { IPlayersRepository } from "@modules/players/repositories/IPlayersRepository";
+import { PlayersRepository } from "@modules/players/infra/typeorm/repositories/PlayerRepository";
 
 container.registerSingleton<IUsersRepository>(
   "UsersRepository",
@@ -27,4 +24,24 @@ container.registerSingleton<IUsersRepository>(
 container.registerSingleton<IUsersTokensRepository>(
   "UsersTokensRepository",
   UsersTokensRepository
+);
+
+container.registerSingleton<ITeamsRepository>(
+  "TeamsRepository",
+  TeamsRepository
+);
+
+container.registerSingleton<ITournamentRepository>(
+  "TournamentsRepository",
+  TournamentRepository
+);
+
+container.registerSingleton<IGamesRepository>(
+  "GamesRepository",
+  GamesRepository
+);
+
+container.registerSingleton<IPlayersRepository>(
+  "PlayersRepository",
+  PlayersRepository
 );

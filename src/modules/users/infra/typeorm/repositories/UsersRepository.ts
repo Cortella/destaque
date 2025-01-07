@@ -15,14 +15,12 @@ class UsersRepository implements IUsersRepository {
   async create({
     id,
     name,
-    username,
     email,
     password
   }: ICreateUserDTO): Promise<void> {
     const user = this.repository.create({
       id,
       name,
-      username,
       email,
       password,
     });
@@ -33,7 +31,7 @@ class UsersRepository implements IUsersRepository {
 
     const user = await this.repository.findOne({
         where: { id },
-        select: ["id", "name", "email", "username", "created_at"],
+        select: ["id", "name", "email", "created_at"],
     });
 
     if (!user) {
@@ -46,12 +44,8 @@ class UsersRepository implements IUsersRepository {
   async findByEmail(email: string): Promise<User> {
     const user = await this.repository.findOne({
       where: { email },
-      select: ["id", "name", "email", "username", "created_at"],
+      select: ["id", "name", "email", "created_at", "password", "isAdmin"],
   });
-
-  if (!user) {
-      throw new AppError("User not found!");
-  }
 
   return user;
   }

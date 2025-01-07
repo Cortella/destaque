@@ -29,7 +29,7 @@ class AuthenticateUserUseCase {
     private usersRepository: IUsersRepository,
     @inject("UsersTokensRepository")
     private usersTokensRepository: IUsersTokensRepository,
-    @inject("DayjsDateProvider")
+    @inject("DateProvider")
     private dateProvider: IDateProvider
   ) {}
 
@@ -44,13 +44,13 @@ class AuthenticateUserUseCase {
     } = auth;
 
     if (!user) {
-      throw new AppError("Email or password incorrect!");
+      throw new AppError("Email ou senha incorretos!");
     }
 
     const passwordMatch = await compare(password, user.password);
 
     if (!passwordMatch) {
-      throw new AppError("Email or password incorrect!");
+      throw new AppError("Email ou senha incorretos!");
     }
 
     const token = sign({}, secret_token, {
@@ -58,6 +58,7 @@ class AuthenticateUserUseCase {
       expiresIn: expires_in_token,
     });
 
+    console.log
     const refresh_token_expires_date = this.dateProvider.addDays(
       expires_refresh_token_days
     );

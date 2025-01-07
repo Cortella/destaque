@@ -1,4 +1,11 @@
-import { Column, CreateDateColumn, Entity, PrimaryColumn } from "typeorm";
+import { Player } from "@modules/players/infra/typeorm/entities/Player";
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  OneToOne,
+  PrimaryColumn,
+} from "typeorm";
 import { v4 as uuidV4 } from "uuid";
 
 @Entity("users")
@@ -13,9 +20,6 @@ class User {
   email: string;
 
   @Column()
-  username: string;
-
-  @Column()
   password: string;
 
   @Column({ default: false })
@@ -24,6 +28,8 @@ class User {
   @CreateDateColumn()
   created_at: Date;
 
+  @OneToOne(() => Player, (player) => player.user)
+  player: Player;
   constructor() {
     if (!this.id) {
       this.id = uuidV4();
