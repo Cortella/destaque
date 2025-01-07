@@ -10,17 +10,15 @@ export class UpdateUserTableAndCreatePlayer1634075673485
   implements MigrationInterface
 {
   public async up(queryRunner: QueryRunner): Promise<void> {
-    // Remover o campo "username" da tabela "users"
     await queryRunner.dropColumn("users", "username");
 
-    // Criar a tabela "players" com chave primária compartilhada
     await queryRunner.createTable(
       new Table({
         name: "players",
         columns: [
           {
             name: "id",
-            type: "varchar", // Use UUID para consistência com a tabela "users"
+            type: "varchar",
             isPrimary: true,
             isNullable: false,
           },
