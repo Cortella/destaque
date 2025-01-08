@@ -22,7 +22,7 @@ class TeamsRepository implements ITeamsRepository {
     });
 
     if (!team) {
-      throw new AppError("User not found!", 404);
+      throw new AppError("Time não encontrado", 404);
     }
 
     return team;

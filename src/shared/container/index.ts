@@ -15,6 +15,8 @@ import { IGamesRepository } from "@modules/games/repositories/IGamesRepository";
 import { GamesRepository } from "@modules/games/infra/typeorm/repositories/GamesRepository";
 import { IPlayersRepository } from "@modules/players/repositories/IPlayersRepository";
 import { PlayersRepository } from "@modules/players/infra/typeorm/repositories/PlayerRepository";
+import { PredictionRepository } from "@modules/players/infra/typeorm/repositories/PredictionsRepository";
+import { IPredictionRepository } from "@modules/players/repositories/IPredictionsRepository";
 
 container.registerSingleton<IUsersRepository>(
   "UsersRepository",
@@ -44,4 +46,9 @@ container.registerSingleton<IGamesRepository>(
 container.registerSingleton<IPlayersRepository>(
   "PlayersRepository",
   PlayersRepository
+);
+
+container.registerSingleton<IPredictionRepository>(
+  "PredictionsRepository",
+  PredictionRepository
 );

@@ -188,3 +188,8 @@ VALUES
   ('game64', '6', '8', '2025-05-22 18:00:00', 'Estádio Castor Cifuentes', 'scheduled', 'c9d6f0c3-5b44-41b3-9a94-bf784efc8f3b', '11'),
   ('game65', '7', '10', '2025-05-28 16:00:00', 'Estádio José Mammoud Abbas', 'scheduled', 'c9d6f0c3-5b44-41b3-9a94-bf784efc8f3b', '11'),
   ('game66', '9', '11', '2025-05-28 18:00:00', 'Estádio Manduzão', 'scheduled', 'c9d6f0c3-5b44-41b3-9a94-bf784efc8f3b', '11')
+
+
+INSERT INTO leagues (id, name, isPublic, adminId, isOfficial, moderators, lastActivityDate, pointsPerFullHit, pointsPerResult,pointsPerTeamGoals, boostPerRound, year)
+  VALUES
+  ('1', 'cartomantes', 1,'ea666716-2cd7-4a98-a029-ec2e20581ea6', 0, NULL,'2025-05-14 18:00:00', 10, 5, 1,0, 2025)
