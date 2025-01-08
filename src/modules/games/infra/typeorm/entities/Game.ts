@@ -8,6 +8,7 @@ import {
   PrimaryColumn,
 } from 'typeorm';
 import { v4 as uuidV4 } from "uuid";
+import { Round } from '@modules/tournaments/infra/typeorm/entities/Round';
 
 @Entity('games')
 export class Game {
@@ -52,6 +53,10 @@ export class Game {
   @ManyToOne(() => Tournament, (tournament) => tournament.games)
   @JoinColumn({ name: 'tournamentId' })
   tournament: Tournament;
+
+  @ManyToOne(() => Round, (round) => round.games)
+  @JoinColumn({ name: 'roundId' })
+  round: Round;
 
   @Column()
   tournamentId: string;
