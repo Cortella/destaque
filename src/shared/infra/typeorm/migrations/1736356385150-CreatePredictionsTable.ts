@@ -1,7 +1,11 @@
-import { MigrationInterface, QueryRunner, Table, TableForeignKey } from "typeorm";
+import {
+  MigrationInterface,
+  QueryRunner,
+  Table,
+  TableForeignKey,
+} from "typeorm";
 
 export class CreatePredictionsTable1736356385150 implements MigrationInterface {
-
   public async up(queryRunner: QueryRunner): Promise<void> {
     // Criar a tabela de palpites
     await queryRunner.createTable(
@@ -17,41 +21,49 @@ export class CreatePredictionsTable1736356385150 implements MigrationInterface {
           {
             name: "playerId",
             type: "varchar",
-            length: "36",  // UUID armazenado como varchar
+            length: "36", // UUID armazenado como varchar
           },
           {
             name: "gameId",
             type: "varchar",
-            length: "36",  // UUID armazenado como varchar
+            length: "36", // UUID armazenado como varchar
           },
           {
             name: "leagueId",
             type: "varchar",
-            length: "36",  // UUID armazenado como varchar
+            length: "36", // UUID armazenado como varchar
           },
           {
             name: "homeTeamScore",
-            type: "int",  // Número de gols previstos para o time da casa
+            type: "int", // Número de gols previstos para o time da casa
             comment: "Número de gols previstos para o time da casa",
           },
           {
             name: "awayTeamScore",
-            type: "int",  // Número de gols previstos para o time visitante
+            type: "int", // Número de gols previstos para o time visitante
             comment: "Número de gols previstos para o time visitante",
           },
           {
-            name: "predictionDate",
+            name: "points",
+            type: "int",
+            default: null,
+            isNullable: true,
+          },
+          {
+            name: "created_at",
             type: "timestamp",
             default: "CURRENT_TIMESTAMP",
+            isNullable: false,
           },
+
           {
             name: "updatedAt",
             type: "timestamp",
             default: "CURRENT_TIMESTAMP",
             onUpdate: "CURRENT_TIMESTAMP",
             comment: "Data e hora da última atualização",
-          }
-        ]
+          },
+        ],
       })
     );
 
@@ -63,7 +75,7 @@ export class CreatePredictionsTable1736356385150 implements MigrationInterface {
         referencedColumnNames: ["id"],
         referencedTableName: "players",
         onDelete: "CASCADE",
-        onUpdate: "CASCADE"
+        onUpdate: "CASCADE",
       })
     );
 
@@ -74,7 +86,7 @@ export class CreatePredictionsTable1736356385150 implements MigrationInterface {
         referencedColumnNames: ["id"],
         referencedTableName: "games",
         onDelete: "CASCADE",
-        onUpdate: "CASCADE"
+        onUpdate: "CASCADE",
       })
     );
 
@@ -83,9 +95,9 @@ export class CreatePredictionsTable1736356385150 implements MigrationInterface {
       new TableForeignKey({
         columnNames: ["leagueId"],
         referencedColumnNames: ["id"],
-        referencedTableName: "leagues",  // Relacionamento com a tabela leagues
+        referencedTableName: "leagues", // Relacionamento com a tabela leagues
         onDelete: "CASCADE",
-        onUpdate: "CASCADE"
+        onUpdate: "CASCADE",
       })
     );
   }
