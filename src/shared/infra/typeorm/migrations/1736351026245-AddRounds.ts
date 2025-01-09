@@ -20,14 +20,24 @@ export class AddRounds1736351026245 implements MigrationInterface {
             isNullable: false,
           },
           {
+            name: "tournamentId",
+            type: "varchar",
+            isNullable: false,
+          },
+          {
             name: "roundNumber",
             type: "int",
             isNullable: false,
           },
           {
-            name: "tournamentId",
-            type: "varchar",
-            isNullable: false,
+            name: "initialDate",
+            type: "timestamp",
+            isNullable: true,
+          },
+          {
+            name: "finalDate",
+            type: "timestamp",
+            isNullable: true,
           },
           {
             name: "created_at",
