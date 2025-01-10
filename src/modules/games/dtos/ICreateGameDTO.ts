@@ -6,8 +6,7 @@ export interface ICreateGameDTO {
   date: Date;
   location: string;
   status: 'scheduled' | 'in_progress' | 'finished' | 'canceled';
-  score?: {
-    home: number;
-    away: number;
-  };
+  homeTeamResult?: number;
+  awayTeamResult?: number;
+  totalCards?: number;
 }

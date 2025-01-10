@@ -1,3 +1,4 @@
+import { ResultGame } from "@modules/games/dtos/GameTypes";
 import { Game } from "@modules/games/infra/typeorm/entities/Game";
 import { League } from "@modules/league/infra/typeorm/entities/League";
 import {
@@ -23,6 +24,9 @@ class Prediction {
 
   @Column()
   leagueId: string;
+
+  @Column()
+  predictionResult: "home" | "away" | "draw";
 
   @ManyToOne(() => Game, (game) => game.predictions)
   @JoinColumn({ name: "gameId", referencedColumnName: "id" })

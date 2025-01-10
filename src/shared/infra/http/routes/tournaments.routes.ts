@@ -8,7 +8,7 @@ const tournamentsRoutes = Router();
 const setEndGameController = new SetEndGamesController()
 const crateTournamentController = new CreateTournamentController()
 
-tournamentsRoutes.post("games/end", setEndGameController.handle);
+tournamentsRoutes.post("/games/end", setEndGameController.handle);
 tournamentsRoutes.post("/", crateTournamentController.handle);
 
 export { tournamentsRoutes };

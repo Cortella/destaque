@@ -1,14 +1,9 @@
 import { Tournament } from '@modules/tournaments/infra/typeorm/entities/Tournament';
-import { Team } from '@modules/teams/infra/typeorm/entities/Team'; // Importação da entidade Team
-import {
-  Entity,
-  Column,
-  ManyToOne,
-  JoinColumn,
-  PrimaryColumn,
-} from 'typeorm';
+import { Team } from '@modules/teams/infra/typeorm/entities/Team';
+import { Entity, Column, ManyToOne, JoinColumn, PrimaryColumn, OneToMany } from 'typeorm';
 import { v4 as uuidV4 } from "uuid";
 import { Round } from '@modules/tournaments/infra/typeorm/entities/Round';
+import { Prediction } from '@modules/players/infra/typeorm/entities/Prediction';
 
 @Entity('games')
 export class Game {
@@ -37,17 +32,26 @@ export class Game {
   @Column()
   location: string;
 
+  @Column()
+  homeTeamResult: number;
+
+  @Column()
+  awayTeamResult: number;
+
+  @Column()
+  totalCards: number;
+
+  @Column({
+    type: 'enum',
+    enum: ['home', 'away', 'draw'],
+  })
+  result: 'home' | 'away' | 'draw';
+
   @Column({
     type: 'enum',
     enum: ['scheduled', 'in_progress', 'finished', 'canceled'],
   })
   status: 'scheduled' | 'in_progress' | 'finished' | 'canceled';
-
-  @Column({ type: 'json', nullable: true })
-  score?: {
-    home: number;
-    away: number;
-  };
 
   // Relacionamento com o torneio
   @ManyToOne(() => Tournament, (tournament) => tournament.games)
@@ -60,6 +64,11 @@ export class Game {
 
   @Column()
   tournamentId: string;
+
+  // Relacionamento com as previsões (um para muitos)
+  @OneToMany(() => Prediction, (prediction) => prediction.game)
+  predictions: Prediction[];
+
   constructor() {
     if (!this.id) {
       this.id = uuidV4();

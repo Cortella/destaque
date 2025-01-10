@@ -4,6 +4,7 @@ export interface IPrediction {
   leagueId: string;
   homeTeamScore: number;
   awayTeamScore: number;
+  predictionResult: "home" | "away" | "draw";
 }
 
 export interface IPlayerPredictions {
