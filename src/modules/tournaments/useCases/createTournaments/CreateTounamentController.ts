@@ -1,12 +1,13 @@
 import { Response, Request } from "express";
 import { container } from "tsyringe";
 import { CreateTournamentUseCase } from "./CreateTounamentUseCase";
+import { ICreateTournamentsDTO } from "@modules/tournaments/dtos/ICreateTournamentsDTO";
 
 class CreateTournamentController {
   async handle(request: Request, response: Response): Promise<Response> {
     try {
       const createTournament = container.resolve(CreateTournamentUseCase);
-      const data = request.body;
+      const data : ICreateTournamentsDTO = request.body;
 
       const Tournament = await createTournament.execute(data);
 

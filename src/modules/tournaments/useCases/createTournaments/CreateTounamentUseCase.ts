@@ -7,7 +7,7 @@ import { ICreateTournamentsDTO } from "@modules/tournaments/dtos/ICreateTourname
 @injectable()
 class CreateTournamentUseCase {
   constructor(
-    @inject("TournanamentRepository")
+    @inject("TournamentsRepository")
     private tournamentsRepository: ITournamentRepository
   ) {}
 

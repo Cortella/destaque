@@ -7,6 +7,8 @@ import { IGamesRepository } from "@modules/games/repositories/IGamesRepository";
 import { IDateProvider } from "@shared/container/providers/DateProvider/IDateProvider";
 import { ITeamsRepository } from "@modules/teams/repositories/ITeamsRepository";
 
+// TODO 
+//quando o jogador fizer umnumeor de palpites validos e houver palpites invalidos, salve no banco mas avise os que estao invalidos 
 @injectable()
 class SetPlayerPredictionsUseCase {
   constructor(
@@ -21,12 +23,14 @@ class SetPlayerPredictionsUseCase {
   ) {}
 
   async execute(data: IPlayerPredictions): Promise<void> {
+    console.log("estou no usecase")
     const { predictions } = data;
 
     const dateNow = this.dateProvider.dateNow();
 
     let errors = 0;
     for (const prediction of predictions) {
+      console.log("prediction", prediction)
       if (
         !/^(?:10|[0-9])$/.test(String(prediction?.homeTeamScore)) ||
         !/^(?:10|[0-9])$/.test(String(prediction?.awayTeamScore))
@@ -45,11 +49,8 @@ class SetPlayerPredictionsUseCase {
         dateNow,
         game?.date
       );
-
-      if (checkTimePreview <= 0) {
+      if (checkTimePreview <= 0 || game?.status != "scheduled") {
         errors++;
-        prediction.homeTeamScore = null;
-        prediction.awayTeamScore = null;
       } else {
         let predictionToSave : IPrediction = {
             gameId: prediction?.gameId,
@@ -59,6 +60,8 @@ class SetPlayerPredictionsUseCase {
             awayTeamScore: prediction?.awayTeamScore
 
         }
+        console.log("tentando entrar no repo de prediction")
+        
         await this.predictionRepository.setPlayerPrediction(predictionToSave);
       }
     }
