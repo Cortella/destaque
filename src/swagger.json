@@ -20,35 +20,35 @@
         "tags": [
           "Users"
         ],
-        "summary": "Create a new user",
-        "description": "To create a new user, add the 'name' and 'email' fields in the request body.",
+        "summary": "Cria um novo usuário",
+        "description": "Rota de criação de usuário",
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "required": [
-                  "name",
-                  "email"
-                ],
                 "type": "object",
                 "properties": {
                   "name": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "John Doe"
                   },
                   "email": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "teste@email.com"
                   },
                   "password": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "12345678"
                   },
-                  "driver_license": "string"
-                },
-                "example": {
-                  "name": "Example",
-                  "email": "example@email.com",
-                  "password": "123456",
-                  "driver_license": "132546dsdf"
+                  "confirmPassword": {
+                    "type": "string",
+                    "example": "12345678"
+                  },
+                  "birthDate": {
+                    "type": "string",
+                    "example": "1998-10-15"
+                  }
                 }
               }
             }
@@ -59,7 +59,38 @@
             "description": "Created"
           },
           "400": {
-            "description": "Bad Request"
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "Senha deve ter no mínimo 8 caracteres"
+                    }
+                  }
+                }
+              }
+            }
+
+          },
+          "500": {
+            "description": "Internal Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "Servidor nao responde"
+                    }
+                  }
+                }
+              }
+            }
+
           }
         }
       },

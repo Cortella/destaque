@@ -26,7 +26,7 @@ class AddTournamentInLeagueController {
 
       return response.status(201).json(res);
     } catch (error) {
-      return response.status(400).json({ error: error.message });
+      return response.status(error?.statusCode).json({ error: error?.message });
     }
   }
 }

@@ -80,6 +80,7 @@ class CreateUserUseCase {
         confirmPassword,
         birthDate,
       });
+      
     } catch (error) {
       if (error instanceof z.ZodError) {
         throw new AppError(error.errors[0].message, 400);

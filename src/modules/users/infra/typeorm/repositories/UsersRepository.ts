@@ -34,7 +34,8 @@ class UsersRepository implements IUsersRepository {
 
     const user = await this.repository.findOne({
         where: { id },
-        select: ["id", "name", "email", "created_at"],
+        select: ["id", "name", "email", "birthDate", "player", "created_at"],
+        relations: ["player"]
     });
 
     if (!user) {
