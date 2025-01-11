@@ -17,14 +17,15 @@ import { PredictionRepository } from "@modules/players/infra/typeorm/repositorie
 import { IPredictionRepository } from "@modules/players/repositories/IPredictionsRepository";
 import { ILeagueRepository } from "@modules/league/repositories/ILeagueRepository";
 import { LeagueRepository } from "@modules/league/infra/typeorm/repositories/LeagueRepository";
+import { REPOSITORY } from "@utils/utils";
 
 container.registerSingleton<IUsersRepository>(
-  "UsersRepository",
+  REPOSITORY.USERS_REPOSITORY,
   UsersRepository
 );
 
 container.registerSingleton<IUsersTokensRepository>(
-  "UsersTokensRepository",
+  REPOSITORY.USERS_TOKEN_REPOSITORY,
   UsersTokensRepository
 );
 
