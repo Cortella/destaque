@@ -4,11 +4,12 @@ import { AppError } from "@shared/errors/AppError";
 import { ILeagueRepository } from "@modules/league/repositories/ILeagueRepository";
 import { ICreateLeagueDTO } from "@modules/league/dto/ICreateLeagueDTO";
 import { League } from "@modules/league/infra/typeorm/entities/League";
+import { REPOSITORIES } from "@utils/utils";
 
 @injectable()
 class CreateLeagueUseCase {
   constructor(
-    @inject("LeagueRepository")
+    @inject(REPOSITORIES.LEAGUE_REPOSITORY)
     private leagueRepository: ILeagueRepository
   ) {}
 

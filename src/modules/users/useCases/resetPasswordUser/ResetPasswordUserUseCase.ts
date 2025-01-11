@@ -4,6 +4,7 @@ import { inject, injectable } from "tsyringe";
 import { hash } from "bcrypt";
 import { IUsersTokensRepository } from "@modules/users/repositories/IUsersTokensrepository";
 import { IUsersRepository } from "@modules/users/repositories/IUsersRepository";
+import { REPOSITORIES } from "@utils/utils";
 
 interface IRequest {
   token: string;
@@ -13,11 +14,11 @@ interface IRequest {
 @injectable()
 class ResetPasswordUserUseCase {
   constructor(
-    @inject("UsersTokensRepository")
+    @inject(REPOSITORIES.USERS_TOKENS_REPOSITORY)
     private usersTokensRepository: IUsersTokensRepository,
     @inject("DayjsDateProvider")
     private dateProvider: IDateProvider,
-    @inject("UsersRepository")
+    @inject(REPOSITORIES.USERS_REPOSITORY)
     private usersRepository: IUsersRepository
   ) {}
   async execute({ token, password }: IRequest): Promise<void> {

@@ -10,17 +10,18 @@ import { IGamesRepository } from "@modules/games/repositories/IGamesRepository";
 import { IDateProvider } from "@shared/container/providers/DateProvider/IDateProvider";
 import { ITeamsRepository } from "@modules/teams/repositories/ITeamsRepository";
 import { getGameResult } from "@utils/gameUtils";
+import { REPOSITORIES } from "@utils/utils";
 
 // TODO
 //quando o jogador fizer umnumeor de palpites validos e houver palpites invalidos, salve no banco mas avise os que estao invalidos
 @injectable()
 class SetPlayerPredictionsUseCase {
   constructor(
-    @inject("PredictionsRepository")
+    @inject(REPOSITORIES.PREDICTIONS_REPOSITORY)
     private predictionRepository: IPredictionRepository,
-    @inject("GamesRepository")
+    @inject(REPOSITORIES.GAMES_REPOSITORY)
     private gamesRepository: IGamesRepository,
-    @inject("TeamsRepository")
+    @inject(REPOSITORIES.TEAMS_REPOSITORY)
     private teamsRepository: ITeamsRepository,
     @inject("DateProvider")
     private dateProvider: IDateProvider

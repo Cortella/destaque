@@ -3,13 +3,14 @@ import { inject, injectable } from "tsyringe";
 import { AppError } from "@shared/errors/AppError";
 import { ILeagueRepository } from "@modules/league/repositories/ILeagueRepository";
 import { ITournamentRepository } from "@modules/tournaments/repositories/ITournamentRepository";
+import { REPOSITORIES } from "@utils/utils";
 
 @injectable()
 class AddTournamentInLeagueUseCase {
   constructor(
-    @inject("LeagueRepository")
+    @inject(REPOSITORIES.LEAGUE_REPOSITORY)
     private leagueRepository: ILeagueRepository,
-    @inject("TournamentsRepository")
+    @inject(REPOSITORIES.TOURNAMENTS_REPOSITORY)
     private tournamentRepository: ITournamentRepository
   ) {}
 

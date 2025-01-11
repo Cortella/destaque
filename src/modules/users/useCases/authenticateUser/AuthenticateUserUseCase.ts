@@ -7,7 +7,7 @@ import { IUsersRepository } from "@modules/users/repositories/IUsersRepository";
 import { IUsersTokensRepository } from "@modules/users/repositories/IUsersTokensrepository";
 import { IDateProvider } from "@shared/container/providers/DateProvider/IDateProvider";
 import { AppError } from "@shared/errors/AppError";
-import { REPOSITORY } from "@utils/utils";
+import { REPOSITORIES } from "@utils/utils";
 
 interface IRequest {
   email: string;
@@ -26,9 +26,9 @@ interface IResponse {
 @injectable()
 class AuthenticateUserUseCase {
   constructor(
-    @inject(REPOSITORY.USERS_REPOSITORY)
+    @inject(REPOSITORIES.USERS_REPOSITORY)
     private usersRepository: IUsersRepository,
-    @inject("UsersTokensRepository")
+    @inject(REPOSITORIES.USERS_TOKENS_REPOSITORY)
     private usersTokensRepository: IUsersTokensRepository,
     @inject("DateProvider")
     private dateProvider: IDateProvider

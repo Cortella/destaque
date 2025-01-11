@@ -4,13 +4,13 @@ import { inject, injectable } from "tsyringe";
 
 import { IUsersRepository } from "@modules/users/repositories/IUsersRepository";
 import { AppError } from "@shared/errors/AppError";
-import { REPOSITORY } from "@utils/utils";
+import { REPOSITORIES } from "@utils/utils";
 
 
 @injectable()
 class CreateUserUseCase {
   constructor(
-    @inject(REPOSITORY.USERS_REPOSITORY)
+    @inject(REPOSITORIES.USERS_REPOSITORY)
     private usersRepository: IUsersRepository
   ) {}
 

@@ -17,44 +17,44 @@ import { PredictionRepository } from "@modules/players/infra/typeorm/repositorie
 import { IPredictionRepository } from "@modules/players/repositories/IPredictionsRepository";
 import { ILeagueRepository } from "@modules/league/repositories/ILeagueRepository";
 import { LeagueRepository } from "@modules/league/infra/typeorm/repositories/LeagueRepository";
-import { REPOSITORY } from "@utils/utils";
+import { REPOSITORIES } from "@utils/utils";
 
 container.registerSingleton<IUsersRepository>(
-  REPOSITORY.USERS_REPOSITORY,
+  REPOSITORIES.USERS_REPOSITORY,
   UsersRepository
 );
 
 container.registerSingleton<IUsersTokensRepository>(
-  REPOSITORY.USERS_TOKEN_REPOSITORY,
+  REPOSITORIES.USERS_TOKENS_REPOSITORY,
   UsersTokensRepository
 );
 
 container.registerSingleton<ITeamsRepository>(
-  "TeamsRepository",
+  REPOSITORIES.TEAMS_REPOSITORY,
   TeamsRepository
 );
 
 container.registerSingleton<ITournamentRepository>(
-  "TournamentsRepository",
+  REPOSITORIES.TOURNAMENTS_REPOSITORY,
   TournamentRepository
 );
 
 container.registerSingleton<IGamesRepository>(
-  "GamesRepository",
+  REPOSITORIES.GAMES_REPOSITORY,
   GamesRepository
 );
 
 container.registerSingleton<IPlayersRepository>(
-  "PlayersRepository",
+  REPOSITORIES.PALYERS_REPOSITORY,
   PlayersRepository
 );
 
 container.registerSingleton<IPredictionRepository>(
-  "PredictionsRepository",
+  REPOSITORIES.PREDICTIONS_REPOSITORY,
   PredictionRepository
 );
 
 container.registerSingleton<ILeagueRepository>(
-  "LeagueRepository",
+  REPOSITORIES.LEAGUE_REPOSITORY,
   LeagueRepository
 );

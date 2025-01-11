@@ -5,15 +5,16 @@ import { ISetResults } from "@modules/players/dtos/IPlayerPredictions";
 import { IGamesRepository } from "@modules/games/repositories/IGamesRepository";
 import { ILeagueRepository } from "@modules/league/repositories/ILeagueRepository";
 import { IPredictionRepository } from "@modules/players/repositories/IPredictionsRepository";
+import { REPOSITORIES } from "@utils/utils";
 
 @injectable()
 class SetEndGamesUseCase {
   constructor(
-    @inject("GamesRepository")
+    @inject(REPOSITORIES.GAMES_REPOSITORY)
     private gamesRepository: IGamesRepository,
-    @inject("LeagueRepository")
+    @inject(REPOSITORIES.LEAGUE_REPOSITORY)
     private leagueRepository: ILeagueRepository,
-    @inject("PredictionsRepository")
+    @inject(REPOSITORIES.PREDICTIONS_REPOSITORY)
     private predictionRepository: IPredictionRepository
   ) {}
 
