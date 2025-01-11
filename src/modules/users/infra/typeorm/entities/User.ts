@@ -25,11 +25,15 @@ class User {
   @Column({ default: false })
   isAdmin: boolean;
 
+  @Column()
+  birthDate: Date;
+
   @CreateDateColumn()
   created_at: Date;
 
   @OneToOne(() => Player, (player) => player.user)
   player: Player;
+
   constructor() {
     if (!this.id) {
       this.id = uuidV4();

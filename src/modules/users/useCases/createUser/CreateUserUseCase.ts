@@ -16,8 +16,13 @@ class CreateUserUseCase {
   async execute({
     name,
     email,
-    password
+    password,
+    birthDate,
+    confirmPassword
   }: ICreateUserDTO): Promise<void> {
+
+    if(password !== confirmPassword) 
+      throw new AppError("Senhas não conferem")
     const userAlreadyExists = await this.usersRepository.findByEmail(email);
 
     if (userAlreadyExists) {
@@ -29,7 +34,9 @@ class CreateUserUseCase {
     await this.usersRepository.create({
       name,
       email,
-      password: passwordHash
+      password: passwordHash,
+      confirmPassword,
+      birthDate
     });
   }
 }
