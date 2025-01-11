@@ -8,3 +8,8 @@ export const REPOSITORIES = {
     PREDICTIONS_REPOSITORY: "PredictionsRepository",
     LEAGUE_REPOSITORY: "LeagueRepository"
 }
+
+export const PROVIDERS = {
+    DATE_PROVIDER: "DateProvider",
+    MAIL_PROVIDER: "MailProvider"
+}
