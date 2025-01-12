@@ -1,0 +1,7 @@
+build:
+  script:
+    - npm install
+    - npm run build
+release:
+  command:
+    - npm run typeorm migration:run
