@@ -1,10 +1,10 @@
-{
+export default{
   "type": "mysql",
-  "port": 3308,
-  "host": "localhost",
-  "username": "root",
-  "password": "",
-  "database": "cartomantes",
+  "port": process.env.DATABASE_PORT,
+  "host": process.env.DATABASE_HOST,
+  "username": process.env.DATABASE_USER,
+  "password": process.env.DATABASE_PASS,
+  "database": process.env.DATABASE_NAME,
   "migrations": ["./src/shared/infra/typeorm/migrations/*.ts"],
   "entities": ["./src/modules/*/infra/typeorm/entities/*.ts"],
   "cli": {
