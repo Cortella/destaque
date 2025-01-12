@@ -1,6 +1,8 @@
 export interface ICreatePlayerDTO {
   id?: string;
   username: string;
+  favoriteTeam: string;
+  
   userId?: string;
-  player_Avatar?: string;
+  playerAvatar?: string;
 }

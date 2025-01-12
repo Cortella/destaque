@@ -16,14 +16,17 @@ class UsersRepository implements IUsersRepository {
     id,
     name,
     email,
-    password
+    password,
+    birthDate
   }: ICreateUserDTO): Promise<void> {
     const user = this.repository.create({
       id,
       name,
       email,
       password,
+      birthDate
     });
+    console.log("user = ", user)
     await this.repository.save(user);
   }
 
@@ -31,7 +34,8 @@ class UsersRepository implements IUsersRepository {
 
     const user = await this.repository.findOne({
         where: { id },
-        select: ["id", "name", "email", "created_at"],
+        select: ["id", "name", "email", "birthDate", "player", "created_at"],
+        relations: ["player"]
     });
 
     if (!user) {

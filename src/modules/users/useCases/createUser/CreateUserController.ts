@@ -8,18 +8,25 @@ class CreateUserController {
   async handle(request: Request, response: Response): Promise<Response> {
     try {
       const createUserUseCase = container.resolve(CreateUserUseCase);
-      const { name, email, password }: ICreateUserDTO =
-        request.body;
+      const {
+        name,
+        email,
+        password,
+        confirmPassword,
+        birthDate,
+      }: ICreateUserDTO = request.body;
 
       const user = await createUserUseCase.execute({
         name,
         email,
         password,
+        confirmPassword,
+        birthDate,
       });
 
       return response.status(201).json(user);
     } catch (error) {
-      return response.status(400).json({ error: error.message });
+      return response.status(error?.statusCode).json({ error: error?.message });
     }
   }
 }

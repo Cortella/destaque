@@ -1,0 +1,1 @@
+export type ResultGame = "home" | "away" | "draw";

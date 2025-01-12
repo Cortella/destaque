@@ -5,6 +5,7 @@ import auth from "@config/auth";
 import { IUsersTokensRepository } from "@modules/users/repositories/IUsersTokensrepository";
 import { IDateProvider } from "@shared/container/providers/DateProvider/IDateProvider";
 import { AppError } from "@shared/errors/AppError";
+import { REPOSITORIES } from "@utils/utils";
 
 interface IPayload {
   sub: string;
@@ -19,7 +20,7 @@ interface ITokenResponse {
 @injectable()
 class RefreshTokenUseCase {
   constructor(
-    @inject("UsersTokensRepository")
+    @inject(REPOSITORIES.USERS_TOKENS_REPOSITORY)
     private usersTokensRepository: IUsersTokensRepository,
     @inject("DateProvider")
     private dateProvider: IDateProvider

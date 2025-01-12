@@ -9,12 +9,12 @@ class GetUserByIdController {
     try {
       const getUserByIdUseCase = container.resolve(GetUserByIdUseCase);
       const { user_id } = request.params;
-      console.log("user_id = ", user_id);
       const user = await getUserByIdUseCase.execute(user_id);
 
       return response.status(200).json(user);
     } catch (error) {
-      return response.status(400).json({ error: error.message });
+      console.log
+      return response.status(error?.statusCode).json({ error: error?.message });
     }
   }
 }

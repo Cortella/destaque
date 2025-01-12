@@ -1,16 +1,13 @@
 import { Team } from "@modules/teams/infra/typeorm/entities/Team";
 
-export type TournamentType = 'mata-mata' | 'grupos' | 'liga-nacional' | 'copa';
+export type TournamentType = 'mata-mata' | 'pontos-corridos' | 'copa';
 
 export interface ICreateTournamentsDTO {
   id?: string;
   name: string;
   initalDate: Date;
   finalDate: string;
-  teams?: Team[];
-  type?: TournamentType;
-  champion?: Team;
-
+  type: TournamentType;
 }
 
 export interface ITournamentLeagueFormatDTO {

@@ -11,6 +11,12 @@ export class Round {
   @Column()
   roundNumber: number;
 
+  @Column()
+  initialDate:Date
+
+  @Column()
+  finalDate:Date
+  
   @ManyToOne(() => Tournament, (tournament) => tournament.rounds)
   @JoinColumn({ name: 'tournamentId' })
   tournament: Tournament;

@@ -3,11 +3,12 @@ import { inject, injectable } from "tsyringe";
 import { AppError } from "@shared/errors/AppError";
 import { ICreatePlayerDTO } from "@modules/players/dtos/ICreatePlayerDTO";
 import { IPlayersRepository } from "@modules/players/repositories/IPlayersRepository";
+import { REPOSITORIES } from "@utils/utils";
 
 @injectable()
 class CreatePlayerUseCase {
   constructor(
-    @inject("PlayersRepository")
+    @inject(REPOSITORIES.PALYERS_REPOSITORY)
     private playersRepository: IPlayersRepository
   ) {}
 

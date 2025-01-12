@@ -14,8 +14,8 @@ class TournamentRepository implements ITournamentRepository {
     this.repository = getRepository(Tournament);
   }
   async create(data: ICreateTournamentsDTO): Promise<void> {
-    const Tournament = this.repository.create(data);
-    await this.repository.save(Tournament);
+    const tournament = this.repository.create(data);
+    await this.repository.save(tournament);
   }
 
   async findById(id: string): Promise<Tournament> {

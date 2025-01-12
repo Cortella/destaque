@@ -1,8 +1,6 @@
 import { container } from "tsyringe";
-
 import "@shared/container/providers/DateProvider";
 import "@shared/container/providers/MailProvider";
-
 import { UsersRepository } from "@modules/users/infra/typeorm/repositories/UsersRepository";
 import { UsersTokensRepository } from "@modules/users/infra/typeorm/repositories/UsersTokensRepository";
 import { IUsersRepository } from "@modules/users/repositories/IUsersRepository";
@@ -15,33 +13,48 @@ import { IGamesRepository } from "@modules/games/repositories/IGamesRepository";
 import { GamesRepository } from "@modules/games/infra/typeorm/repositories/GamesRepository";
 import { IPlayersRepository } from "@modules/players/repositories/IPlayersRepository";
 import { PlayersRepository } from "@modules/players/infra/typeorm/repositories/PlayerRepository";
+import { PredictionRepository } from "@modules/players/infra/typeorm/repositories/PredictionsRepository";
+import { IPredictionRepository } from "@modules/players/repositories/IPredictionsRepository";
+import { ILeagueRepository } from "@modules/league/repositories/ILeagueRepository";
+import { LeagueRepository } from "@modules/league/infra/typeorm/repositories/LeagueRepository";
+import { REPOSITORIES } from "@utils/utils";
 
 container.registerSingleton<IUsersRepository>(
-  "UsersRepository",
+  REPOSITORIES.USERS_REPOSITORY,
   UsersRepository
 );
 
 container.registerSingleton<IUsersTokensRepository>(
-  "UsersTokensRepository",
+  REPOSITORIES.USERS_TOKENS_REPOSITORY,
   UsersTokensRepository
 );
 
 container.registerSingleton<ITeamsRepository>(
-  "TeamsRepository",
+  REPOSITORIES.TEAMS_REPOSITORY,
   TeamsRepository
 );
 
 container.registerSingleton<ITournamentRepository>(
-  "TournamentsRepository",
+  REPOSITORIES.TOURNAMENTS_REPOSITORY,
   TournamentRepository
 );
 
 container.registerSingleton<IGamesRepository>(
-  "GamesRepository",
+  REPOSITORIES.GAMES_REPOSITORY,
   GamesRepository
 );
 
 container.registerSingleton<IPlayersRepository>(
-  "PlayersRepository",
+  REPOSITORIES.PALYERS_REPOSITORY,
   PlayersRepository
+);
+
+container.registerSingleton<IPredictionRepository>(
+  REPOSITORIES.PREDICTIONS_REPOSITORY,
+  PredictionRepository
+);
+
+container.registerSingleton<ILeagueRepository>(
+  REPOSITORIES.LEAGUE_REPOSITORY,
+  LeagueRepository
 );
