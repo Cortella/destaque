@@ -4,7 +4,7 @@
 
 
 site: cartomantesdoesporte.com.br
-/n
+
 redes: @cartomantesdoesporte / @cartomantesdabola
 
 
