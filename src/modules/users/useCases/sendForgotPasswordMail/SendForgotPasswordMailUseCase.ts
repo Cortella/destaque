@@ -7,7 +7,7 @@ import { IDateProvider } from "@shared/container/providers/DateProvider/IDatePro
 import { IMailProvider } from "@shared/container/providers/MailProvider/IMailProvider";
 import { IUsersRepository } from "@modules/users/repositories/IUsersRepository";
 import { IUsersTokensRepository } from "@modules/users/repositories/IUsersTokensrepository";
-import { REPOSITORIES } from "@utils/utils";
+import { PROVIDERS, REPOSITORIES } from "@utils/utils";
 
 @injectable()
 class SendForgotPasswordMailUseCase {
@@ -16,9 +16,9 @@ class SendForgotPasswordMailUseCase {
     private usersRepository: IUsersRepository,
     @inject(REPOSITORIES.USERS_TOKENS_REPOSITORY)
     private usersTokensRepository: IUsersTokensRepository,
-    @inject("DayjsDateProvider")
+    @inject(PROVIDERS.DATE_PROVIDER)
     private dateProvider: IDateProvider,
-    @inject("MailProvider")
+    @inject(PROVIDERS.MAIL_PROVIDER)
     private mailProvider: IMailProvider
   ) {}
 
