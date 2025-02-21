@@ -1,6 +1,6 @@
 import 'reflect-metadata'
 import { DataSource } from 'typeorm'
-console.log('estou no datasource')
+
 export const AppDataSource = new DataSource({
   type: 'mysql',
   host: 'localhost',

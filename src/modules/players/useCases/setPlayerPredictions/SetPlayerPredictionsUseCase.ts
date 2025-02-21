@@ -34,7 +34,6 @@ class SetPlayerPredictionsUseCase {
 
     let errors = 0
     for (const prediction of predictions) {
-      console.log('prediction', prediction)
       if (
         !/^(?:10|[0-9])$/.test(String(prediction?.homeTeamScore)) ||
         !/^(?:10|[0-9])$/.test(String(prediction?.awayTeamScore))

@@ -33,7 +33,6 @@ class PlayersRepository implements IPlayersRepository {
     const player = await this.repository.findOne({
       where: { username },
     })
-    console.log('busca retornou x')
     return player
   }
 

@@ -1,4 +1,5 @@
 import 'reflect-metadata'
+import { env } from '../../../env'
 import express, { Request, Response, NextFunction } from 'express'
 import 'express-async-errors'
 import swaggerUi from 'swagger-ui-express'
@@ -10,12 +11,11 @@ import '@shared/infra/typeorm'
 
 import { router } from './routes'
 import swaggerFile from '../../../swagger.json'
+import { STATUS_CODE } from '@utils/http'
 
 const app = express()
-const door = 3333
 app.use(express.json())
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerFile))
-console.log('SERVIDOR INICIANDO')
 app.use(router)
 
 app.use(
@@ -26,7 +26,7 @@ app.use(
       })
     }
 
-    return response.status(500).json({
+    return response.status(STATUS_CODE.INTERNAL_SERVER_ERROR).json({
       status: 'error',
       message: `Internal server errror - ${err.message}`,
     })
@@ -34,7 +34,7 @@ app.use(
 )
 app.listen(3333, () =>
   console.log(
-    `\nAPI URL: http://localhost:${door}
-    \nSwagger: http://localhost:${door}/api-docs`,
+    `\nAPI URL: http://localhost:${env.PORT}
+    \nSwagger: http://localhost:${env.PORT}/api-docs`,
   ),
 )

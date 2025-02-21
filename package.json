@@ -10,7 +10,14 @@
     "format": "prettier --write .",
     "migration:run": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js migration:run -d data-source.ts",
     "lint": "eslint . ",
-    "lint:fix": "eslint . --fix "
+    "lint:fix": "eslint . --fix ",
+    "test": "vitest run --dir \"src/modules/\"",
+    "pretest:e2e": "run-s test:create-prisma-environment test:install-prisma-environment",
+    "test:e2e": "vitest run --dir src/http",
+    "test:e2e:watch": "vitest --dir src/http",
+    "test:watch": "vitest --dir src/use-cases",
+    "test:coverage": "vitest run --coverage",
+    "test:ui": "vitest --ui"
   },
   "dependencies": {
     "aws-sdk": "^2.1692.0",
@@ -31,7 +38,6 @@
     "rate-limiter-flexible": "^5.0.5",
     "redis": "^4.7.0",
     "reflect-metadata": "^0.2.2",
-    "supertest": "^7.0.0",
     "swagger-ui-express": "^5.0.1",
     "ts-jest": "^29.2.5",
     "tsyringe": "^4.8.0",
@@ -50,12 +56,14 @@
     "@types/node": "^22.13.4",
     "@types/nodemailer": "^6.4.17",
     "@types/redis": "^4.0.11",
+    "@types/supertest": "^6.0.2",
     "@types/swagger-ui-express": "^4.1.7",
     "@types/uuid": "^10.0.0",
     "@typescript-eslint/eslint-plugin": "^8.24.1",
     "@typescript-eslint/parser": "^8.24.1",
     "babel-plugin-module-resolver": "^5.0.2",
     "babel-plugin-transform-typescript-metadata": "^0.3.2",
+    "cross-env": "^7.0.3",
     "eslint": "^9.20.1",
     "eslint-config-prettier": "^10.0.1",
     "eslint-import-resolver-typescript": "^3.8.3",
@@ -64,10 +72,13 @@
     "eslint-plugin-prettier": "^5.2.3",
     "globals": "^16.0.0",
     "prettier": "3.5.1",
+    "supertest": "^7.0.0",
     "ts-node-dev": "^2.0.0",
     "tsconfig-paths": "^4.2.0",
     "tsx": "4.19.2",
     "typescript": "^5.7.3",
-    "typescript-eslint": "^8.24.1"
+    "typescript-eslint": "^8.24.1",
+    "vite-tsconfig-paths": "^5.1.4",
+    "vitest": "^3.0.6"
   }
 }
