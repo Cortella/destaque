@@ -1,6 +1,5 @@
-import { ResultGame } from "@modules/games/dtos/GameTypes";
-import { Game } from "@modules/games/infra/typeorm/entities/Game";
-import { League } from "@modules/league/infra/typeorm/entities/League";
+import { Game } from '@modules/games/infra/typeorm/entities/Game'
+import { League } from '@modules/league/infra/typeorm/entities/League'
 import {
   Column,
   CreateDateColumn,
@@ -8,51 +7,51 @@ import {
   PrimaryColumn,
   JoinColumn,
   ManyToOne,
-} from "typeorm";
-import { v4 as uuidV4 } from "uuid";
+} from 'typeorm'
+import { v4 as uuidV4 } from 'uuid'
 
-@Entity("predictions")
+@Entity('predictions')
 class Prediction {
-  @PrimaryColumn()
-  id: string;
+  @PrimaryColumn({ type: 'uuid' })
+  id: string
 
-  @Column()
-  playerId: string;
+  @Column({ type: 'varchar', length: 255 })
+  playerId: string
 
-  @Column()
-  gameId: string;
+  @Column({ type: 'uuid' })
+  gameId: string
 
-  @Column()
-  leagueId: string;
+  @Column({ type: 'uuid' })
+  leagueId: string
 
-  @Column()
-  predictionResult: "home" | "away" | "draw";
+  @Column({ type: 'enum', enum: ['home', 'away', 'draw'] })
+  predictionResult: 'home' | 'away' | 'draw'
 
   @ManyToOne(() => Game, (game) => game.predictions)
-  @JoinColumn({ name: "gameId", referencedColumnName: "id" })
-  game: Game;
+  @JoinColumn({ name: 'gameId', referencedColumnName: 'id' })
+  game: Game
 
   @ManyToOne(() => League)
-  @JoinColumn({ name: "leagueId" })
-  league: League;
+  @JoinColumn({ name: 'leagueId' })
+  league: League
 
-  @Column()
-  homeTeamScore: number;
+  @Column({ type: 'int' })
+  homeTeamScore: number
 
-  @Column()
-  awayTeamScore: number;
+  @Column({ type: 'int' })
+  awayTeamScore: number
 
-  @Column()
-  points: number;
+  @Column({ type: 'int' })
+  points: number
 
-  @CreateDateColumn()
-  created_at: Date;
+  @CreateDateColumn({ type: 'timestamp' })
+  created_at: Date
 
   constructor() {
     if (!this.id) {
-      this.id = uuidV4();
+      this.id = uuidV4()
     }
   }
 }
 
-export { Prediction };
+export { Prediction }

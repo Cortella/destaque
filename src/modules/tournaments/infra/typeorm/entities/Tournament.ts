@@ -1,46 +1,51 @@
+import { Game } from '@modules/games/infra/typeorm/entities/Game'
+import { League } from '@modules/league/infra/typeorm/entities/League'
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn,
+  ManyToMany,
+} from 'typeorm'
+import { v4 as uuidV4 } from 'uuid'
+import { Round } from './Round'
 
-import { Game } from "@modules/games/infra/typeorm/entities/Game";
-import { League } from "@modules/league/infra/typeorm/entities/League";
-import { Column, CreateDateColumn, Entity, ManyToOne, OneToMany, PrimaryColumn, ManyToMany } from "typeorm";
-import { v4 as uuidV4 } from "uuid";
-import { Round } from "./Round";
-
-@Entity("tournaments")
+@Entity('tournaments')
 class Tournament {
-  @PrimaryColumn()
-  id: string;
+  @PrimaryGeneratedColumn('uuid')
+  id: string
 
-  @Column()
-  name: string;
+  @Column({ type: 'varchar', length: 255 })
+  name: string
 
-  @Column()
-  initialDate: Date;
+  @Column({ type: 'timestamp' })
+  initialDate: Date
 
-  @Column()
-  finalDate: Date;
+  @Column({ type: 'timestamp' })
+  finalDate: Date
 
-  @Column({ type: "varchar", length: 50 })
-  type: string;
+  @Column({ type: 'varchar', length: 50 })
+  type: string
 
-  @CreateDateColumn()
-  created_at: Date;
+  @CreateDateColumn({ type: 'timestamp' })
+  created_at: Date
 
   @OneToMany(() => Game, (game) => game.tournament)
-  games: Game[];
-  
+  games: Game[]
+
   @ManyToMany(() => League, (league) => league.tournaments)
-  leagues: League[];
+  leagues: League[]
 
   @OneToMany(() => Round, (round) => round.tournament)
-  rounds: Round[];
-  
+  rounds: Round[]
+
   constructor() {
     if (!this.id) {
-      this.id = uuidV4();
+      this.id = uuidV4()
     }
   }
 }
 
-export { Tournament };
-
-
+export { Tournament }

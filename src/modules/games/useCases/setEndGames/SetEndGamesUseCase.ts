@@ -35,7 +35,7 @@ class SetEndGamesUseCase {
     );
 
     for (const result of results) {
-      let game = await this.gamesRepository.findById(result?.gameId);
+      const game = await this.gamesRepository.findById(result?.gameId);
       if (!game)
         throw new AppError(`Jogo com ID ${result?.gameId} não encontrado.`);
 

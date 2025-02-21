@@ -1,49 +1,47 @@
-import { League } from "@modules/league/infra/typeorm/entities/League";
-import { User } from "@modules/users/infra/typeorm/entities/User";
+import { League } from '@modules/league/infra/typeorm/entities/League'
+import { User } from '@modules/users/infra/typeorm/entities/User'
 import {
   Entity,
   Column,
   CreateDateColumn,
   OneToOne,
   JoinColumn,
-  PrimaryColumn,
+  PrimaryGeneratedColumn,
   OneToMany,
   ManyToMany,
-} from "typeorm";
-import { v4 as uuidV4 } from "uuid";
+} from 'typeorm'
+import { v4 as uuidV4 } from 'uuid'
 
-@Entity("players")
+@Entity('players')
 export class Player {
-  @PrimaryColumn()
-  id: string;
+  @PrimaryGeneratedColumn('uuid')
+  id: string
 
-  @Column({ type: "varchar", length: 255 })
-  username: string;
+  @Column({ type: 'varchar', length: 255 })
+  username: string
 
-  @Column({ type: "varchar", length: 255 })
-  player_avatar: string;
+  @Column({ type: 'varchar', length: 255 })
+  player_avatar: string
 
-  @CreateDateColumn({ type: "timestamp" })
-  created_at: Date;
+  @CreateDateColumn({ type: 'timestamp' })
+  created_at: Date
 
-  @OneToOne(type => User)
-  @JoinColumn({ name: "userId" })
-  user: User;
+  @OneToOne(() => User)
+  @JoinColumn({ name: 'userId' })
+  user: User
 
-  @Column({ type: "varchar", nullable: true })
-  userId: string;
+  @Column({ type: 'varchar', nullable: true })
+  userId: string | null
 
-  // // Relacionamento com Leagues como membro
   @ManyToMany(() => League, (league) => league.members)
-  leagues: League[];
+  leagues: League[]
 
-  // Relacionamento com Leagues como administrador
   @OneToMany(() => League, (league) => league.admin)
-  adminLeagues: League[];
+  adminLeagues: League[]
 
   constructor() {
     if (!this.id) {
-      this.id = uuidV4();
+      this.id = uuidV4()
     }
   }
 }

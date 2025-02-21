@@ -44,7 +44,7 @@ export class PredictionRepository implements IPredictionRepository {
     );
     const game = await this.gameRepository.findOne({ where: { id: gameId } });
     for (const predicion of predictions) {
-      let points = getPlayerPoints(predicion, game, leagueMetricPoints);
+      const points = getPlayerPoints(predicion, game, leagueMetricPoints);
       await this.repository.update(predicion.id, { points });
     }
   }

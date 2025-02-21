@@ -1,69 +1,68 @@
-import { Repository, getRepository } from "typeorm";
+import { Repository, getRepository } from 'typeorm'
 
-import { Game } from "../entities/Game";
-import { IGamesRepository } from "@modules/games/repositories/IGamesRepository";
-import { ICreateGameDTO } from "@modules/games/dtos/ICreateGameDTO";
-import { Prediction } from "@modules/players/infra/typeorm/entities/Prediction";
-import { Tournament } from "@modules/tournaments/infra/typeorm/entities/Tournament";
-import { getGameResult } from "@utils/gameUtils";
+import { Game } from '../entities/Game'
+import { IGamesRepository } from '@modules/games/repositories/IGamesRepository'
+import { ICreateGameDTO } from '@modules/games/dtos/ICreateGameDTO'
+import { Prediction } from '@modules/players/infra/typeorm/entities/Prediction'
+import { Tournament } from '@modules/tournaments/infra/typeorm/entities/Tournament'
+import { getGameResult } from '@utils/gameUtils'
 
 class GamesRepository implements IGamesRepository {
-  private repository: Repository<Game>;
+  private repository: Repository<Game>
 
   constructor() {
-    this.repository = getRepository(Game);
+    this.repository = getRepository(Game)
   }
-  async getTornamentIdByGame(gameId: string): Promise<string> {
+  async getTornamentIdByGame(gameId: string): Promise<string | undefined> {
     const game = await this.repository.findOne({
       where: { id: gameId },
-    });
-    return game?.tournamentId;
+    })
+    return game?.tournamentId
   }
 
   getPredicionsByGameId(gameId: string): Promise<void> {
-    throw new Error("Method not implemented.");
+    throw new Error('Method not implemented.')
   }
 
   async setFinishedGame(result: {
-    gameId: string;
-    homeTeamResult: number;
-    awayTeamResult: number;
+    gameId: string
+    homeTeamResult: number
+    awayTeamResult: number
   }): Promise<void> {
-
     await this.repository.update(
       { id: result.gameId },
       {
-        status: "finished",
+        status: 'finished',
         awayTeamResult: result.awayTeamResult,
         homeTeamResult: result.homeTeamResult,
         result: getGameResult(result.homeTeamResult, result.awayTeamResult),
-      }
-    );
+      },
+    )
   }
   async create(data: ICreateGameDTO): Promise<void> {
-    const Game = this.repository.create(data);
-    await this.repository.save(Game);
+    const Game = this.repository.create(data)
+    await this.repository.save(Game)
   }
 
-  async findById(id: string): Promise<Game> {
+  async findById(id: string): Promise<Game | null> {
     const Game = await this.repository.findOne({
       where: { id },
-    });
-    return Game;
+    })
+    return Game
   }
 
-  async findByName(name: string): Promise<Game> {
+  async findByName(name: string): Promise<Game | null> {
     const Game = await this.repository.findOne({
       where: { name },
-    });
+    })
 
-    return Game;
+    return Game
   }
 
   show(): Promise<Game[]> {
-    const Games = this.repository.find();
-    return Games;
+    const Games = this.repository.find()
+    return Games
   }
 }
 
-export { GamesRepository };
+export { GamesRepository }
