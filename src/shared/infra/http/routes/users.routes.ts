@@ -1,9 +1,9 @@
 import { Router } from 'express'
 
-import { CreateUserController } from '@modules/users/useCases/createUser/CreateUserController'
-import { ensureAuthenticated } from '@shared/infra/http/middlewares/ensuredAuthenticated'
-import { GetUserByIdController } from '@modules/users/useCases/getUserById/GetUserByIdController'
-import { SendForgotPasswordMailController } from '@modules/users/useCases/sendForgotPasswordMail/SendForgotPasswordMailController'
+// import { ensureAuthenticated } from '@shared/infra/http/middlewares/ensuredAuthenticated'
+import { SendForgotPasswordMailController } from '@modules/users/http/SendForgotPasswordMailController'
+import { GetUserByIdController } from '@modules/users/http/GetUserByIdController'
+import { CreateUserController } from '@modules/users/http/CreateUserController'
 
 const usersRoutes = Router()
 

@@ -1,4 +1,6 @@
 import { container } from 'tsyringe'
+import { DataSource } from 'typeorm'
+import { AppDataSource } from '../../../data-source'
 import './providers/DateProvider'
 import './providers/MailProvider'
 import { UsersRepository } from '@modules/users/infra/typeorm/repositories/UsersRepository'
@@ -18,6 +20,8 @@ import { IPredictionRepository } from '@modules/players/repositories/IPrediction
 import { ILeagueRepository } from '@modules/league/repositories/ILeagueRepository'
 import { LeagueRepository } from '@modules/league/infra/typeorm/repositories/LeagueRepository'
 import { REPOSITORIES } from '@utils/utils'
+
+container.registerInstance<DataSource>('DataSource', AppDataSource)
 
 container.registerSingleton<IUsersRepository>(
   REPOSITORIES.USERS_REPOSITORY,

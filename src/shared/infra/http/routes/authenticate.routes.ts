@@ -1,14 +1,14 @@
-import { Router } from "express";
+import { Router } from 'express'
 
-import { AuthenticateUserController } from "@modules/users/useCases/authenticateUser/AuthenticateUserController";
-import { RefreshTokenController } from "@modules/users/useCases/refreshToken/RefreshTokenController";
+import { AuthenticateUserController } from '@modules/users/http/AuthenticateUserController'
+import { RefreshTokenController } from '@modules/users/http/RefreshTokenController'
 
-const authenticateRoutes = Router();
+const authenticateRoutes = Router()
 
-const authenticateUserController = new AuthenticateUserController();
-const refreshTokenController = new RefreshTokenController();
+const authenticateUserController = new AuthenticateUserController()
+const refreshTokenController = new RefreshTokenController()
 
-authenticateRoutes.post("/loggin", authenticateUserController.handle);
-authenticateRoutes.post("/refresh-token", refreshTokenController.handle);
+authenticateRoutes.post('/login', authenticateUserController.handle)
+authenticateRoutes.post('/refresh-token', refreshTokenController.handle)
 
-export { authenticateRoutes };
+export { authenticateRoutes }

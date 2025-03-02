@@ -1,15 +1,15 @@
-import { Repository, getRepository } from 'typeorm'
-
+import { Repository } from 'typeorm'
 import { ICreateUserDTO } from '@modules/users/dtos/ICreateUserDTO'
 import { User } from '@modules/users/infra/typeorm/entities/User'
 import { IUsersRepository } from '@modules/users/repositories/IUsersRepository'
 import { AppError } from '@shared/errors/AppError'
+import { AppDataSource } from '../../../../../../data-source'
 
 class UsersRepository implements IUsersRepository {
   private repository: Repository<User>
 
   constructor() {
-    this.repository = getRepository(User)
+    this.repository = AppDataSource.getRepository(User)
   }
 
   async create({
@@ -26,6 +26,7 @@ class UsersRepository implements IUsersRepository {
       password,
       birthDate,
     })
+
     console.log('user = ', user)
     await this.repository.save(user)
     return user
@@ -45,13 +46,11 @@ class UsersRepository implements IUsersRepository {
     return user
   }
 
-  async findByEmail(email: string): Promise<User> {
-    const user = await this.repository.findOne({
+  async findByEmail(email: string): Promise<User | null> {
+    return this.repository.findOne({
       where: { email },
       select: ['id', 'name', 'email', 'created_at', 'password', 'isAdmin'],
     })
-
-    return user
   }
 }
 

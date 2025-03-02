@@ -2,7 +2,7 @@ import { compare } from 'bcrypt'
 import { sign } from 'jsonwebtoken'
 import { inject, injectable } from 'tsyringe'
 
-import auth from '@config/auth'
+import { auth } from '@config/auth'
 import { IUsersRepository } from '@modules/users/repositories/IUsersRepository'
 import { IUsersTokensRepository } from '@modules/users/repositories/IUsersTokensrepository'
 import { IDateProvider } from '@shared/container/providers/DateProvider/IDateProvider'
@@ -24,7 +24,7 @@ interface IResponse {
 }
 
 @injectable()
-class AuthenticateUserUseCase {
+class AuthenticateUseCase {
   constructor(
     @inject(REPOSITORIES.USERS_REPOSITORY)
     private usersRepository: IUsersRepository,
@@ -54,7 +54,7 @@ class AuthenticateUserUseCase {
       throw new AppError('Email ou senha incorretos!')
     }
 
-    const token = sign({}, secret_token, {
+    const token = sign({}, String(secret_token), {
       subject: user.id,
       expiresIn: expires_in_token,
     })
@@ -88,4 +88,4 @@ class AuthenticateUserUseCase {
   }
 }
 
-export { AuthenticateUserUseCase }
+export { AuthenticateUseCase }

@@ -1,7 +1,7 @@
 import 'reflect-metadata'
 import { describe, expect, it, beforeEach } from 'vitest'
 import { hash } from 'bcrypt'
-import { AuthenticateUserUseCase } from './AuthenticateUserUseCase'
+import { AuthenticateUseCase } from './AuthenticateUseCase'
 import { InMemoryUsersRepository } from '@modules/users/repositories/in-memory/InMemoryUsersRepository'
 import { IDateProvider } from '@shared/container/providers/DateProvider/IDateProvider'
 import { InMemoryUsersTokensRepository } from '@modules/users/repositories/in-memory/InMemoryUsersTokensRepository'
@@ -11,14 +11,14 @@ import { DayjsDateProvider } from '@shared/container/providers/DateProvider/impl
 let usersRepository: InMemoryUsersRepository
 let usersTokenRepository: InMemoryUsersTokensRepository
 let dateProvider: IDateProvider
-let sut: AuthenticateUserUseCase
+let sut: AuthenticateUseCase
 
 describe('Authenticate Use Case', () => {
   beforeEach(() => {
     usersRepository = new InMemoryUsersRepository()
     usersTokenRepository = new InMemoryUsersTokensRepository()
     dateProvider = new DayjsDateProvider()
-    sut = new AuthenticateUserUseCase(
+    sut = new AuthenticateUseCase(
       usersRepository,
       usersTokenRepository,
       dateProvider,

@@ -1,11 +1,11 @@
 import 'reflect-metadata'
+import * as dotenv from 'dotenv'
+dotenv.config()
 import { env } from '../../../env'
 import express, { Request, Response, NextFunction } from 'express'
 import 'express-async-errors'
 import swaggerUi from 'swagger-ui-express'
 import { AppError } from '@shared/errors/AppError'
-import * as dotenv from 'dotenv'
-dotenv.config()
 import '../../container'
 import '@shared/infra/typeorm'
 
@@ -32,7 +32,7 @@ app.use(
     })
   },
 )
-app.listen(3333, () =>
+app.listen(env.PORT, () =>
   console.log(
     `\nAPI URL: http://localhost:${env.PORT}
     \nSwagger: http://localhost:${env.PORT}/api-docs`,
