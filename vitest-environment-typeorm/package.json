@@ -1,0 +1,8 @@
+{
+  "name": "vitest-environment-typeorm",
+  "version": "1.0.0",
+  "main": "index.ts",
+  "author": "cortella",
+  "license": "ISC",
+  "description": ""
+}

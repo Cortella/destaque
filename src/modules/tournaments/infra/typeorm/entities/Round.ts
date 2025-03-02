@@ -1,32 +1,39 @@
-import { Game } from "@modules/games/infra/typeorm/entities/Game";
-import { Column, Entity, ManyToOne, OneToMany, PrimaryColumn, JoinColumn } from "typeorm";
-import { v4 as uuidV4 } from "uuid";
-import { Tournament } from "./Tournament";
+import { Game } from '@modules/games/infra/typeorm/entities/Game'
+import {
+  Column,
+  Entity,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn, // Use PrimaryGeneratedColumn para UUID
+  JoinColumn,
+} from 'typeorm'
+import { v4 as uuidV4 } from 'uuid'
+import { Tournament } from './Tournament'
 
 @Entity('rounds')
 export class Round {
-  @PrimaryColumn()
-  id: string;
+  @PrimaryGeneratedColumn('uuid')
+  id: string
 
-  @Column()
-  roundNumber: number;
+  @Column({ type: 'int' })
+  roundNumber: number
 
-  @Column()
-  initialDate:Date
+  @Column({ type: 'timestamp' })
+  initialDate: Date
 
-  @Column()
-  finalDate:Date
-  
+  @Column({ type: 'timestamp' })
+  finalDate: Date
+
   @ManyToOne(() => Tournament, (tournament) => tournament.rounds)
   @JoinColumn({ name: 'tournamentId' })
-  tournament: Tournament;
+  tournament: Tournament
 
   @OneToMany(() => Game, (game) => game.round)
-  games: Game[];
+  games: Game[]
 
   constructor() {
     if (!this.id) {
-      this.id = uuidV4();
+      this.id = uuidV4()
     }
   }
 }

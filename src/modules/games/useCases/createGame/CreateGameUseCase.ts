@@ -8,7 +8,7 @@ import { REPOSITORIES } from "@utils/utils";
 @injectable()
 class CreateGameUseCase {
   constructor(
-    @inject(REPOSITORIES.GAMES_REPOSITORY)
+    @inject("GamesRepository")
     private gameRepository: IGamesRepository
   ) {}
 

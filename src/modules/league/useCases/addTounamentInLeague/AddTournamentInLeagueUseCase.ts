@@ -14,7 +14,7 @@ class AddTournamentInLeagueUseCase {
     private tournamentRepository: ITournamentRepository
   ) {}
 
-  async execute(tournamentId: string, leagueId: string): Promise<Object> {
+  async execute(tournamentId: string, leagueId: string): Promise<object> {
     const tournament = await this.tournamentRepository.findById(tournamentId);
     const league = await this.leagueRepository.getById(leagueId);
 

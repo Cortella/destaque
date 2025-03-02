@@ -1,44 +1,44 @@
-import { Player } from "@modules/players/infra/typeorm/entities/Player";
+import { Player } from '@modules/players/infra/typeorm/entities/Player'
 import {
+  Entity,
   Column,
   CreateDateColumn,
-  Entity,
   OneToOne,
-  PrimaryColumn,
-} from "typeorm";
-import { v4 as uuidV4 } from "uuid";
+  PrimaryGeneratedColumn,
+} from 'typeorm'
+import { v4 as uuidV4 } from 'uuid'
 
-@Entity("users")
+@Entity('users')
 class User {
-  @PrimaryColumn()
-  id: string;
+  @PrimaryGeneratedColumn('uuid')
+  id: string
 
-  @Column()
-  name: string;
+  @Column({ type: 'varchar', length: 255 })
+  name: string
 
-  @Column()
-  email: string;
+  @Column({ type: 'varchar', length: 255, unique: true })
+  email: string
 
-  @Column()
-  password: string;
+  @Column({ type: 'varchar', length: 255 })
+  password: string
 
-  @Column({ default: false })
-  isAdmin: boolean;
+  @Column({ type: 'boolean', default: false })
+  isAdmin: boolean
 
-  @Column()
-  birthDate: Date;
+  @Column({ type: 'date' })
+  birthDate: Date
 
-  @CreateDateColumn()
-  created_at: Date;
+  @CreateDateColumn({ type: 'timestamp' })
+  created_at: Date
 
   @OneToOne(() => Player, (player) => player.user)
-  player: Player;
+  player: Player
 
   constructor() {
     if (!this.id) {
-      this.id = uuidV4();
+      this.id = uuidV4()
     }
   }
 }
 
-export { User };
+export { User }

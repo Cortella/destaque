@@ -1,6 +1,6 @@
 import {
   Entity,
-  PrimaryColumn,
+  PrimaryGeneratedColumn,
   Column,
   CreateDateColumn,
   UpdateDateColumn,
@@ -8,74 +8,74 @@ import {
   ManyToMany,
   JoinTable,
   OneToMany,
-} from "typeorm";
-import { Player } from "@modules/players/infra/typeorm/entities/Player";
-import { Tournament } from "@modules/tournaments/infra/typeorm/entities/Tournament";
-import { v4 as uuidV4 } from "uuid";
+} from 'typeorm'
+import { Player } from '@modules/players/infra/typeorm/entities/Player'
+import { Tournament } from '@modules/tournaments/infra/typeorm/entities/Tournament'
+import { v4 as uuidV4 } from 'uuid'
 
-@Entity("leagues")
+@Entity('leagues')
 export class League {
-  @PrimaryColumn()
-  id: string;
+  @PrimaryGeneratedColumn('uuid')
+  id: string
 
-  @Column()
-  name: string;
+  @Column({ type: 'varchar', length: 255 })
+  name: string
 
-  @Column({ default: false })
-  isPublic: boolean;
+  @Column({ type: 'boolean', default: false })
+  isPublic: boolean
 
   @ManyToOne(() => Player, (player) => player.adminLeagues)
-  admin: Player;
+  admin: Player
 
   @ManyToMany(() => Player)
   @JoinTable({
-    name: "league_players",
-    joinColumn: { name: "leagueId", referencedColumnName: "id" },
-    inverseJoinColumn: { name: "playerId", referencedColumnName: "id" },
+    name: 'league_players',
+    joinColumn: { name: 'leagueId', referencedColumnName: 'id' },
+    inverseJoinColumn: { name: 'playerId', referencedColumnName: 'id' },
   })
-  members: Player[];
+  members: Player[]
 
   @ManyToMany(() => Tournament, (tournament) => tournament.leagues)
   @JoinTable({
-    name: "league_tournaments", // Nome da tabela intermediária
-    joinColumn: { name: "leagueId", referencedColumnName: "id" },
-    inverseJoinColumn: { name: "tournamentId", referencedColumnName: "id" },
+    name: 'league_tournaments',
+    joinColumn: { name: 'leagueId', referencedColumnName: 'id' },
+    inverseJoinColumn: { name: 'tournamentId', referencedColumnName: 'id' },
   })
-  tournaments: Tournament[];
+  tournaments: Tournament[]
 
-  @Column({ default: false })
-  isOfficial: boolean;
+  @Column({ type: 'boolean', default: false })
+  isOfficial: boolean
 
-  @Column("json", { nullable: true })
-  moderators?: { id: string; name: string }[];
+  @Column('json', { nullable: true })
+  moderators?: { id: string; name: string }[]
 
-  @Column({ type: "timestamp", nullable: true })
-  lastActivityDate: Date | null;
+  @Column({ type: 'timestamp', nullable: true })
+  lastActivityDate: Date | null
 
-  @Column({ type: "int", default: 0 })
-  pointsPerFullHit: number;
+  @Column({ type: 'int', default: 0 })
+  pointsPerFullHit: number
 
-  @Column({ type: "int", default: 0 })
-  pointsPerResult: number;
+  @Column({ type: 'int', default: 0 })
+  pointsPerResult: number
 
-  @Column({ type: "int", default: 0 })
-  pointsPerTeamGoals: number;
+  @Column({ type: 'int', default: 0 })
+  pointsPerTeamGoals: number
 
-  @Column({ type: "int", default: 0 })
-  boostPerRound: number;
+  @Column({ type: 'int', default: 0 })
+  boostPerRound: number
 
-  @Column({ type: "int", nullable: true })
-  year: number;
+  @Column({ type: 'int', nullable: true })
+  year: number | null
 
-  @CreateDateColumn()
-  createdAt: Date;
+  @CreateDateColumn({ type: 'timestamp' })
+  createdAt: Date
 
-  @UpdateDateColumn()
-  updatedAt: Date;
+  @UpdateDateColumn({ type: 'timestamp' })
+  updatedAt: Date
 
   constructor() {
     if (!this.id) {
-      this.id = uuidV4();
+      this.id = uuidV4()
     }
   }
 }
